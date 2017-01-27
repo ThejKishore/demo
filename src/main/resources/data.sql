@@ -2,6 +2,8 @@ INSERT INTO contact(`name`,`email`,`telephone`,`address`) VALUES ('Thej','kishor
 
 insert into users(username,password,enabled) values('thej','kishore',true);
 insert into users(username,password,enabled) values('shanaya','karuneegar',true);
+insert into users(username,password,enabled) values('guest','guest',true);
 
 insert into authorities(username,authority) values('thej','USER');
 insert into authorities(username,authority) values('shanaya','ADMIN');
+insert into authorities(username,authority) values('guest','USER');
