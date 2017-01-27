@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/console/**").permitAll()
-                .antMatchers("/contactUI").hasAuthority("ADMIN")
+                .antMatchers("/contactUI").hasAuthority("USER")
                 /*.anyRequest().hasAnyRole("USER","ADMIN")*/
                 .anyRequest().authenticated()
                 .and()
