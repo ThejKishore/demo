@@ -3,6 +3,8 @@ package com.kish.xdoc.web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -48,7 +50,12 @@ public class WelcomeController {
     private Environment environment;
 
     @RequestMapping("/property")
-    public String query(@RequestParam("q") String q) {
-        return environment.getProperty(q);
+    public ResponseEntity<String> query(@RequestParam("q") String q) {
+        return new ResponseEntity<String>(environment.getProperty(q),null, HttpStatus.OK);
+    }
+
+    @RequestMapping("/")
+    public String query() {
+        return "admin";
     }
 }
