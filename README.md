@@ -15,6 +15,13 @@ Along with that it applies basic spring security and the Jquery library at the f
 
 
 Application is hosted in pivotal the url is
+
  https://kishdemo.cfapps.io/contactUI
  guest/guest
+ admin/admin
+ admin1/password
+
+ Rest API Documents using Swagger:
+ ---------------------------------
+ https://kishdemo.cfapps.io/swagger-ui.html
 

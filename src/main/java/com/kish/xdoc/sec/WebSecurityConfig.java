@@ -23,14 +23,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     DataSource dataSource;
 
+    private String[] exceptionUrls={"/Contacts","/Contact","/Contact/**","/console/**"};
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/console/**").permitAll()
-                .antMatchers("/contactUI").hasAuthority("USER")
+//              h2 console doesn't work with headers enabled since most of the screens are called in iframes.
+//              .antMatchers("/console/**").permitAll()
+                .antMatchers("/contactUI").hasAnyAuthority("USER","ADMIN")
+
                 /*.anyRequest().hasAnyRole("USER","ADMIN")*/
                 .anyRequest().authenticated()
                 .and()
@@ -41,23 +45,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
 
-       /*
-       for enabling the h2 console
-        http.csrf().disable();
+        //exempting the Rest URI from the csrf checking.
+        http.csrf().ignoringAntMatchers(exceptionUrls);
 
+       /****for enabling the h2 console*****/
+       /*
+        http.csrf().disable();
         http.headers().disable();
         */
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        //Setting up the auth using the inmemory...
        /* auth.inMemoryAuthentication().withUser("user").password("password").roles("USER");
         auth.inMemoryAuthentication().withUser("root").password("root").roles("ADMIN");*/
+
+       //Setting the auth using the jdbcAuthentication.
         auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery(
                 "select username,password, enabled from users where username=?")
                 .authoritiesByUsernameQuery(
-                        "select username, authority from authorities where username=?")
-        ;
+                        "select username, authority from authorities where username=?");
     }
 }
 

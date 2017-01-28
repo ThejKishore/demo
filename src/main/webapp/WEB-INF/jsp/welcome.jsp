@@ -43,9 +43,10 @@
 </script>
 <div class="container">
 
-    <div class="starter-template">
+    <div class="starter-template" style="width: 100%">
         <h4>Spring Boot Web JSP Example</h4>
-        <h5>Message: ${message}</h5>
+        <h5 align="right">Logged In : ${message}</h5>
+        <h5 align="right">Authority : ${authorities}</h5>
     </div>
 
 
