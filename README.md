@@ -1,4 +1,4 @@
-# demo - Spring Boot Sample
+# demo - Spring Boot Sample -demo
 
 This is a spring boot application is a good starting application that has below modules.
 
